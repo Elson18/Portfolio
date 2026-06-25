@@ -6,7 +6,7 @@ const experiences = [
   {
     role: 'Product Engineer Intern',
     company: 'Cloud Destinations',
-    duration: 'August 2026 - Present',
+    duration: 'August 2025 - Present',
     tech: ['Python', 'LangChain', 'LangGraph', 'Azure OpenAI', 'AWS Bedrock', 'FastAPI', 'ChromaDB', 'WhatsApp API'],
     bullets: [
       'Worked on building real-time AI-driven healthcare appointment systems using voice and WhatsApp platforms.',
@@ -35,7 +35,7 @@ const experiences = [
 
 const Experience = () => {
   const containerRef = useRef(null);
-  
+
   // Track scroll position of the timeline container
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -76,7 +76,7 @@ const Experience = () => {
     <section id="experience" className="bg-transparent px-6 md:px-12 py-32 md:py-48 border-b border-border relative">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          
+
           {/* Left Column - Sticky Heading */}
           <div className="lg:col-span-4 lg:sticky lg:top-28 text-left">
             <span className="text-xs font-mono font-bold tracking-[0.25em] text-brand-primary block mb-3 uppercase">
@@ -92,13 +92,13 @@ const Experience = () => {
           </div>
 
           {/* Right Column - Scroll progress timeline */}
-          <div 
+          <div
             ref={containerRef}
             className="lg:col-span-8 flex flex-col gap-16 relative pl-6 md:pl-10 text-left"
           >
             {/* Background trace line */}
             <div className="absolute left-[3px] md:left-[11px] top-4 bottom-4 w-[1px] bg-border" />
-            
+
             {/* Scroll-drawing progress path */}
             <motion.div
               style={{ scaleY, originY: 0 }}
@@ -106,8 +106,8 @@ const Experience = () => {
             />
 
             {experiences.map((exp, index) => (
-              <motion.div 
-                key={index} 
+              <motion.div
+                key={index}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: '-60px' }}
@@ -120,7 +120,7 @@ const Experience = () => {
                 </span>
 
                 {/* Glassmorphic company card */}
-                <div 
+                <div
                   onMouseMove={handleSpotlightMouseMove}
                   onMouseLeave={handleSpotlightMouseLeave}
                   className="spotlight-card glass-card rounded-2xl p-6 md:p-8 border border-border shadow-sm"
@@ -136,7 +136,7 @@ const Experience = () => {
                         {exp.company}
                       </h4>
                     </div>
-                    
+
                     <span className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-text-muted bg-card border border-border py-1 px-3 rounded-full w-fit">
                       <Calendar size={11} />
                       {exp.duration}
@@ -156,8 +156,8 @@ const Experience = () => {
                   {/* Skills tags footer */}
                   <div className="flex flex-wrap gap-1.5 pt-4 border-t border-border/60 relative z-10">
                     {exp.tech.map((t, tIdx) => (
-                      <span 
-                        key={tIdx} 
+                      <span
+                        key={tIdx}
                         className="text-[9px] font-mono font-bold text-text-muted bg-bg border border-border px-2.5 py-1.5 rounded-md hover:border-text-muted transition-colors"
                       >
                         {t}

@@ -29,7 +29,7 @@ const Contact = () => {
   };
 
   const copyEmailToClipboard = () => {
-    navigator.clipboard.writeText('kit27.am18@gmail.com');
+    navigator.clipboard.writeText('elsonaron54@gmail.com');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -130,13 +130,13 @@ const Contact = () => {
                 <span className="text-[10px] font-mono font-bold text-[#64748B] uppercase tracking-widest">
                   Direct Channel
                 </span>
-                
+
                 {/* Magnetic copy wrapper */}
                 <div className="flex items-center gap-3">
                   <span className="text-lg md:text-xl font-bold text-[#0F172A] font-sans">
-                    kit27.am18@gmail.com
+                    elsonaron54@gmail.com
                   </span>
-                  
+
                   <Magnetic range={40} strength={0.3}>
                     <button
                       onClick={copyEmailToClipboard}
@@ -220,7 +220,7 @@ const Contact = () => {
                     value={formValues.name}
                     onChange={handleInputChange}
                     disabled={loading}
-                    placeholder="John Doe"
+                    placeholder="Name"
                     className={`w-full bg-slate-50 border rounded-xl py-3.5 px-4 focus:outline-none focus:ring-1 transition-all text-[#0F172A] placeholder-slate-400 font-sans text-sm ${formErrors.name
                       ? 'border-red-500/50 focus:border-red-400 focus:ring-red-400'
                       : 'border-slate-200 focus:border-[#2563EB] focus:ring-[#2563EB]'
@@ -246,7 +246,7 @@ const Contact = () => {
                     value={formValues.email}
                     onChange={handleInputChange}
                     disabled={loading}
-                    placeholder="john@example.com"
+                    placeholder="name@example.com"
                     className={`w-full bg-slate-50 border rounded-xl py-3.5 px-4 focus:outline-none focus:ring-1 transition-all text-[#0F172A] placeholder-slate-400 font-sans text-sm ${formErrors.email
                       ? 'border-red-500/50 focus:border-red-400 focus:ring-red-400'
                       : 'border-slate-200 focus:border-[#2563EB] focus:ring-[#2563EB]'

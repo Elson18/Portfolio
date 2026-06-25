@@ -6,11 +6,11 @@ const Hero = () => {
   // Parallax offsets
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  
+
   const springConfig = { damping: 50, stiffness: 200, mass: 0.5 };
   const smoothX = useSpring(mouseX, springConfig);
   const smoothY = useSpring(mouseY, springConfig);
-  
+
   // Parallax transforms for background glow positions and elements
   const bgTranslateX = useTransform(smoothX, [-0.5, 0.5], [-15, 15]);
   const bgTranslateY = useTransform(smoothY, [-0.5, 0.5], [-15, 15]);
@@ -106,18 +106,18 @@ const Hero = () => {
   ];
 
   return (
-    <section 
-      id="home" 
+    <section
+      id="home"
       className="min-h-screen flex flex-col justify-between bg-transparent text-text pt-36 pb-20 px-6 md:px-12 relative overflow-hidden"
     >
       {/* Dynamic Background Blur Orbs (Dark Mode Only) */}
-      <motion.div 
+      <motion.div
         style={{ x: bgTranslateX, y: bgTranslateY }}
-        className="absolute top-[10%] left-[10%] w-[500px] h-[500px] bg-brand-primary/5 rounded-full glow-orb hidden dark:block" 
+        className="absolute top-[10%] left-[10%] w-[500px] h-[500px] bg-brand-primary/5 rounded-full glow-orb hidden dark:block"
       />
-      <motion.div 
+      <motion.div
         style={{ x: bgTranslateX, y: bgTranslateY }}
-        className="absolute bottom-[20%] right-[10%] w-[450px] h-[450px] bg-brand-accent/5 rounded-full glow-orb hidden dark:block" 
+        className="absolute bottom-[20%] right-[10%] w-[450px] h-[450px] bg-brand-accent/5 rounded-full glow-orb hidden dark:block"
       />
 
       <div className="max-w-7xl mx-auto w-full flex-grow flex flex-col justify-center items-center text-center relative z-10 py-8">
@@ -128,8 +128,8 @@ const Hero = () => {
           className="flex flex-col items-center max-w-5xl"
         >
           {/* Badge indicator */}
-          <motion.div 
-            variants={itemVariants} 
+          <motion.div
+            variants={itemVariants}
             className="inline-flex items-center gap-2 bg-card border border-border px-4 py-2 rounded-full mb-8 shadow-sm"
           >
             <Sparkles size={13} className="text-brand-primary animate-pulse" />
@@ -141,7 +141,7 @@ const Hero = () => {
           {/* Title with Parallax Floating Pills */}
           <div className="relative mb-8">
             {/* Left Pill */}
-            <motion.div 
+            <motion.div
               style={{ x: pillTranslateX, y: pillTranslateY }}
               initial={{ opacity: 0, x: -30, rotate: -6 }}
               animate={{ opacity: 1, rotate: -6 }}
@@ -153,7 +153,7 @@ const Hero = () => {
             </motion.div>
 
             {/* Right Pill */}
-            <motion.div 
+            <motion.div
               style={{ x: pillTranslateX, y: pillTranslateY }}
               initial={{ opacity: 0, x: 30, rotate: 6 }}
               animate={{ opacity: 1, rotate: 6 }}
@@ -164,17 +164,16 @@ const Hero = () => {
               <span>STATEFUL_NODES</span>
             </motion.div>
 
-            <motion.h1 
+            <motion.h1
               variants={itemVariants}
               className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black font-heading tracking-tighter leading-[0.9] text-gradient-purple uppercase"
             >
-              Intelligent<br />
-              AI Pipelines
+              ELSON BENANZAL A
             </motion.h1>
           </div>
 
           {/* Description */}
-          <motion.p 
+          <motion.p
             variants={itemVariants}
             className="text-base sm:text-lg md:text-xl text-text-muted max-w-2xl leading-relaxed mb-12 font-sans px-4"
           >
@@ -191,7 +190,7 @@ const Hero = () => {
               <span>Explore Ecosystem</span>
               <ArrowRight size={14} className="transform group-hover:translate-x-1 transition-transform" />
             </a>
-            
+
             <a
               href="#contact"
               onClick={(e) => handleScrollTo(e, 'contact')}
@@ -205,7 +204,7 @@ const Hero = () => {
 
       {/* Floating Scroll Indicator */}
       <div className="flex flex-col items-center justify-center mb-8 relative z-10">
-        <a 
+        <a
           href="#about"
           onClick={(e) => handleScrollTo(e, 'about')}
           className="text-text-muted hover:text-text flex flex-col items-center gap-2 text-[10px] font-mono tracking-widest uppercase transition-colors"
@@ -243,7 +242,7 @@ const Hero = () => {
                   {m.icon}
                 </div>
               </div>
-              
+
               <div className="flex flex-col relative z-10">
                 <span className="text-[10px] font-bold tracking-widest text-text font-heading">
                   {m.label}

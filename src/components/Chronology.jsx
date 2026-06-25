@@ -9,7 +9,7 @@ const milestones = [
     type: 'education',
     year: '2023 - 2027',
     title: 'B.E. Artificial Intelligence & ML',
-    org: 'Karpagam Institute of Technology, Coimbatore',
+    org: 'Kalaignarkarunanidhi Institute of Technology, Coimbatore',
     desc: 'Academically focusing on machine learning foundations, probability analytics, calculus, linear algebra, and neural models. Maintained CGPA 8.24.',
     icon: GraduationCap,
     color: '#2563EB'
@@ -61,7 +61,7 @@ const milestones = [
   },
   {
     type: 'internship',
-    year: 'August 2026 - Present',
+    year: 'August 2025 - Present',
     title: 'Product Engineer Intern',
     org: 'Cloud Destinations',
     desc: 'Currently engineering conversational voice companion systems and WhatsApp API integrations using LangChain, LangGraph state-graphs, and AWS Bedrock/Azure OpenAI.',
