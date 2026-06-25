@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Calendar, Briefcase } from 'lucide-react';
 
 const experiences = [
   {
@@ -47,77 +48,87 @@ const Experience = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 15 },
+    hidden: { opacity: 0, y: 25 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
     }
   };
 
   return (
-    <section id="experience" className="bg-slate-50 px-6 md:px-12 py-24 md:py-36">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
+    <section id="experience" className="bg-white px-6 md:px-12 py-32 md:py-48 border-b border-zinc-100 relative">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
           {/* Left Block - Heading */}
-          <div className="lg:col-span-4 lg:sticky lg:top-28">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-3">
-              02 / Timeline
+          <div className="lg:col-span-4 lg:sticky lg:top-28 text-left">
+            <span className="text-xs font-mono font-bold tracking-[0.2em] text-violet-600 block mb-3 uppercase">
+              // 02 / CHRONOLOGY
             </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold font-heading tracking-tight text-slate-950">
-              Work Experience
+            <h2 className="text-4xl md:text-5xl font-black font-heading tracking-tighter text-zinc-950 uppercase leading-none mb-6">
+              EXPERIENCE
             </h2>
+            <div className="h-[2px] bg-zinc-950 w-24 my-6" />
+            <p className="text-xs font-mono font-semibold text-zinc-400 uppercase tracking-widest leading-relaxed max-w-[240px]">
+              A timeline of system deployments, software engineering, and computational models.
+            </p>
           </div>
 
-          {/* Right Block - Experience List */}
+          {/* Right Block - Timeline List */}
           <motion.div 
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-100px' }}
-            className="lg:col-span-8 flex flex-col gap-12 text-left"
+            className="lg:col-span-8 flex flex-col gap-12 text-left relative pl-4 md:pl-8 border-l border-zinc-150"
           >
             {experiences.map((exp, index) => (
               <motion.div 
                 key={index} 
                 variants={itemVariants}
-                className="pb-12 border-b border-slate-200/60 last:border-0 last:pb-0 flex flex-col md:grid md:grid-cols-12 gap-4 md:gap-8"
+                className="relative pb-12 last:pb-0 group"
               >
-                {/* Date */}
-                <div className="md:col-span-3">
-                  <span className="text-sm font-semibold text-slate-400 block">
-                    {exp.duration}
-                  </span>
-                </div>
+                {/* Timeline Dot Indicator */}
+                <span className="absolute -left-[21px] md:-left-[37px] top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-white border-2 border-zinc-300 group-hover:border-violet-600 transition-colors duration-300 z-10">
+                  <span className="h-1.5 w-1.5 rounded-full bg-zinc-200 group-hover:bg-violet-600 transition-colors duration-300" />
+                </span>
 
-                {/* Details */}
-                <div className="md:col-span-9 flex flex-col gap-4">
-                  <div>
-                    <h3 className="text-lg font-bold text-slate-900 leading-snug">
-                      {exp.role}
-                    </h3>
-                    <h4 className="text-sm font-semibold text-brand-primary">
-                      {exp.company}
-                    </h4>
+                <div className="bg-zinc-50 border border-zinc-150 rounded-2xl p-6 md:p-8 hover:shadow-xl hover:shadow-violet-500/[0.02] hover:border-zinc-300 transition-all duration-300">
+                  {/* Top Header */}
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-6">
+                    <div>
+                      <h3 className="text-lg md:text-xl font-bold text-zinc-950 font-heading tracking-tight uppercase">
+                        {exp.role}
+                      </h3>
+                      <h4 className="text-xs font-mono font-bold text-violet-600 mt-1 uppercase tracking-wider flex items-center gap-1.5">
+                        <Briefcase size={12} />
+                        {exp.company}
+                      </h4>
+                    </div>
+                    
+                    <span className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-zinc-400 bg-white border border-zinc-200/80 py-1 px-3 rounded-full w-fit">
+                      <Calendar size={11} />
+                      {exp.duration}
+                    </span>
                   </div>
 
-                  {/* Bullets */}
-                  <ul className="list-none flex flex-col gap-2.5 text-sm text-slate-600">
+                  {/* Bullet points */}
+                  <ul className="flex flex-col gap-3 text-sm text-zinc-600 font-sans mb-6">
                     {exp.bullets.map((bullet, bIdx) => (
-                      <li key={bIdx} className="relative pl-4 leading-relaxed">
-                        <span className="absolute left-0 top-[0.6em] w-1.5 h-1.5 rounded-full bg-slate-300" />
+                      <li key={bIdx} className="relative pl-5 leading-relaxed">
+                        <span className="absolute left-0 top-[0.65em] w-1.5 h-1.5 rounded-full bg-violet-600/30" />
                         <span>{bullet}</span>
                       </li>
                     ))}
                   </ul>
 
                   {/* Tech Tags */}
-                  <div className="flex flex-wrap gap-2 pt-2">
+                  <div className="flex flex-wrap gap-1.5 pt-4 border-t border-zinc-200/50">
                     {exp.tech.map((t, tIdx) => (
                       <span 
                         key={tIdx} 
-                        className="text-xs font-semibold text-slate-500 bg-white border border-slate-200 px-2.5 py-1 rounded-md"
+                        className="text-[10px] font-mono font-bold text-zinc-500 bg-white border border-zinc-200 px-2.5 py-1.5 rounded-md hover:border-zinc-400 hover:text-zinc-800 transition-colors"
                       >
                         {t}
                       </span>

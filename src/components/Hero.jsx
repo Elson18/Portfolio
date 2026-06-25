@@ -1,7 +1,6 @@
 import React from 'react';
-import { motion } from 'react';
-import { ArrowRight } from 'lucide-react';
-import { motion as motionModule } from 'framer-motion';
+import { ArrowRight, Sparkles, Cpu, Trophy, Layers, BookOpen } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Hero = () => {
   const handleScrollTo = (e, id) => {
@@ -21,110 +20,173 @@ const Hero = () => {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        delayChildren: 0.1
+        delayChildren: 0.2
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { type: 'spring', stiffness: 100, damping: 20 }
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
     }
   };
 
+  const metrics = [
+    {
+      number: '1,000+',
+      label: 'SOLVED PROBLEMS',
+      sub: 'LeetCode & CodeChef',
+      icon: <Cpu size={24} className="text-violet-500" />,
+      delay: 0.4
+    },
+    {
+      number: '5',
+      label: 'HACKATHONS',
+      sub: 'Finalist & Winner',
+      icon: <Trophy size={24} className="text-amber-500" />,
+      delay: 0.5
+    },
+    {
+      number: '95%',
+      label: 'RAG ACCURACY',
+      sub: 'Semantic Retrieval',
+      icon: <Layers size={24} className="text-cyan-500" />,
+      delay: 0.6
+    },
+    {
+      number: '45%',
+      label: 'MATCHING SPEED',
+      sub: 'Onboarding Reduction',
+      icon: <BookOpen size={24} className="text-emerald-500" />,
+      delay: 0.7
+    }
+  ];
+
   return (
-    <section id="home" className="min-h-[85vh] flex items-center bg-white px-6 md:px-12 py-16 md:py-24 relative overflow-hidden">
-      <div className="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        {/* Left Typography Block */}
-        <motionModule.div
+    <section id="home" className="min-h-screen flex flex-col justify-between bg-zinc-950 text-white pt-32 pb-16 px-6 md:px-12 relative overflow-hidden bg-dot-grid-dark">
+      {/* Glow Orbs */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-violet-600/10 rounded-full glow-orb" />
+      <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-cyan-500/5 rounded-full glow-orb" />
+
+      <div className="max-w-7xl mx-auto w-full flex-grow flex flex-col justify-center items-center text-center relative z-10 py-12">
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="lg:col-span-7 flex flex-col text-left"
+          className="flex flex-col items-center max-w-5xl"
         >
-          {/* Tag */}
-          <motionModule.div variants={itemVariants} className="mb-6">
-            <span className="text-xs font-bold uppercase tracking-wider text-brand-primary bg-blue-50/50 border border-blue-100/60 px-3.5 py-1.5 rounded-full inline-block">
-              AI & Generative AI Developer
-            </span>
-          </motionModule.div>
-
-          {/* Main Headline */}
-          <motionModule.h1 
+          {/* Tagline Indicator */}
+          <motion.div 
             variants={itemVariants} 
-            className="text-5xl md:text-7xl font-extrabold font-heading tracking-tight leading-[1.05] text-slate-900 mb-6"
+            className="inline-flex items-center gap-2 bg-zinc-900 border border-zinc-800 px-4 py-2 rounded-full mb-8"
           >
-            Building <br />
-            Intelligent AI <br />
-            <span className="bg-gradient-to-r from-brand-primary via-brand-accent to-brand-secondary bg-clip-text text-transparent">
-              Experiences.
+            <Sparkles size={14} className="text-violet-400 animate-pulse" />
+            <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-zinc-400 uppercase">
+              AI Engineer Intern @ Cloud Destinations
             </span>
-          </motionModule.h1>
+          </motion.div>
 
-          {/* Subheading */}
-          <motionModule.p 
+          {/* Big Bold Headline with Floating Pills */}
+          <div className="relative mb-8">
+            {/* Left Floating Pill */}
+            <motion.div 
+              initial={{ opacity: 0, x: -20, rotate: -6 }}
+              animate={{ opacity: 1, x: 0, rotate: -6 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className="absolute -top-12 -left-8 md:-left-20 bg-violet-500 text-white text-[10px] font-bold tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-lg shadow-violet-500/20"
+            >
+              <span>Agentic</span>
+              <svg width="6" height="6" viewBox="0 0 6 6" fill="none" className="inline-block">
+                <circle cx="3" cy="3" r="3" fill="white" />
+              </svg>
+            </motion.div>
+
+            {/* Right Floating Pill */}
+            <motion.div 
+              initial={{ opacity: 0, x: 20, rotate: 6 }}
+              animate={{ opacity: 1, x: 0, rotate: 6 }}
+              transition={{ delay: 0.7, duration: 0.8 }}
+              className="absolute -bottom-4 -right-8 md:-right-16 bg-cyan-500 text-zinc-950 text-[10px] font-bold tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-lg shadow-cyan-500/20"
+            >
+              <span>Stateful</span>
+              <svg width="6" height="6" viewBox="0 0 6 6" fill="none" className="inline-block">
+                <circle cx="3" cy="3" r="3" fill="#09090b" />
+              </svg>
+            </motion.div>
+
+            <motion.h1 
+              variants={itemVariants}
+              className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black font-heading tracking-tighter leading-[0.9] text-gradient-purple uppercase"
+            >
+              Intelligent<br />
+              AI Pipelines
+            </motion.h1>
+          </div>
+
+          {/* Description */}
+          <motion.p 
             variants={itemVariants}
-            className="text-lg md:text-xl text-slate-500 font-normal max-w-xl leading-relaxed mb-8"
+            className="text-base sm:text-lg md:text-xl text-zinc-400 max-w-2xl leading-relaxed mb-10 font-sans"
           >
-            AI Engineer specializing in Generative AI, Machine Learning, Agentic Workflows, and Intelligent Automation.
-          </motionModule.p>
+            I architect stateful agent networks, fine-tune neural model pipelines, and build production-ready machine learning infrastructures.
+          </motion.p>
 
-          {/* CTA Row */}
-          <motionModule.div variants={itemVariants} className="flex flex-wrap gap-4">
+          {/* Action triggers */}
+          <motion.div variants={itemVariants} className="flex flex-wrap gap-4 items-center justify-center">
             <a
               href="#projects"
               onClick={(e) => handleScrollTo(e, 'projects')}
-              className="inline-flex items-center gap-2 text-sm font-semibold text-white bg-brand-primary hover:bg-blue-700 px-6 py-3 rounded-full shadow-sm hover:shadow transition-all duration-200"
+              className="inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-wider text-zinc-950 bg-white hover:bg-zinc-100 px-7 py-4.5 rounded-full transition-all duration-300 shadow-xl shadow-white/5 group cursor-pointer"
             >
-              <span>View Projects</span>
-              <ArrowRight size={16} />
+              <span>Explore Projects</span>
+              <ArrowRight size={14} className="transform group-hover:translate-x-1 transition-transform" />
             </a>
             <a
-              href="/assets/Elson_Benanzal_Resume.pdf"
-              download="Elson_Benanzal_Resume.pdf"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 border border-slate-200 hover:border-slate-400 px-6 py-3 rounded-full hover:bg-slate-50 transition-all duration-200"
+              href="#contact"
+              onClick={(e) => handleScrollTo(e, 'contact')}
+              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white border border-zinc-800 hover:border-zinc-500 px-7 py-4.5 rounded-full bg-zinc-900/50 hover:bg-zinc-900 transition-all duration-300 cursor-pointer"
             >
-              Resume
+              <span>Let's Connect</span>
             </a>
-          </motionModule.div>
-        </motionModule.div>
+          </motion.div>
+        </motion.div>
+      </div>
 
-        {/* Right Minimal Illustration Block */}
-        <motionModule.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut', delay: 0.3 }}
-          className="lg:col-span-5 hidden lg:flex items-center justify-center relative w-full h-[320px] md:h-[400px]"
-        >
-          {/* Subtle architectural coordinates graphic represent math dimension */}
-          <div className="absolute inset-0 border border-slate-100/60 rounded-3xl bg-slate-50/30 flex items-center justify-center">
-            {/* Minimal SVG Coordinate Blueprint */}
-            <svg width="280" height="280" viewBox="0 0 200 200" className="opacity-80">
-              {/* Outer grid boundaries */}
-              <rect x="10" y="10" width="180" height="180" stroke="#f1f5f9" strokeWidth="1" fill="none" />
-              
-              {/* Mathematical alignment ticks */}
-              <line x1="100" y1="10" x2="100" y2="190" stroke="#f1f5f9" strokeWidth="0.8" strokeDasharray="3 3" />
-              <line x1="10" y1="100" x2="190" y2="100" stroke="#f1f5f9" strokeWidth="0.8" strokeDasharray="3 3" />
-              
-              {/* Abstract coordinated lines */}
-              <path d="M 40 100 L 100 40 L 160 100 L 100 160 Z" stroke="#e2e8f0" strokeWidth="1" fill="none" />
-              
-              {/* Active neural nodes */}
-              <circle cx="100" cy="40" r="4" fill="#2563EB" />
-              <circle cx="160" cy="100" r="4" fill="#7C3AED" />
-              <circle cx="100" cy="160" r="4" fill="#06B6D4" />
-              <circle cx="40" cy="100" r="4" fill="#64748b" />
-              
-              {/* Vector dimension weights */}
-              <path d="M 40 100 Q 100 80 160 100" stroke="#2563EB" strokeWidth="1.5" strokeDasharray="1 1" fill="none" opacity="0.6" />
-              <path d="M 100 40 Q 120 100 100 160" stroke="#7C3AED" strokeWidth="1.5" fill="none" opacity="0.4" />
-            </svg>
-          </div>
-        </motionModule.div>
+      {/* Overlapping metric cards at bottom */}
+      <div className="max-w-7xl mx-auto w-full relative z-20 pb-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 metric-card-overlap">
+          {metrics.map((m, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: m.delay, duration: 0.6, ease: 'easeOut' }}
+              whileHover={{ y: -6, transition: { duration: 0.2 } }}
+              className="bg-white border border-zinc-150 rounded-2xl p-5 md:p-6 text-left flex flex-col justify-between h-36 md:h-40 shadow-xl shadow-black/[0.03] card-glow-violet group cursor-default"
+            >
+              <div className="flex justify-between items-start">
+                <span className="text-3xl md:text-4xl font-black font-heading text-zinc-900 tracking-tight leading-none group-hover:text-violet-600 transition-colors">
+                  {m.number}
+                </span>
+                <div className="p-2 bg-zinc-50 rounded-xl group-hover:bg-violet-50 transition-colors">
+                  {m.icon}
+                </div>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] font-bold tracking-widest text-zinc-950 font-heading">
+                  {m.label}
+                </span>
+                <span className="text-[10px] font-medium text-zinc-400 mt-0.5">
+                  {m.sub}
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

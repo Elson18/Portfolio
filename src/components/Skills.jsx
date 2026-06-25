@@ -1,30 +1,42 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Brain, Cpu, Cloud, Database, Code } from 'lucide-react';
 
 const skillsData = [
   {
-    category: 'Languages',
-    items: ['Python', 'Java', 'SQL']
-  },
-  {
     category: 'AI & Machine Learning',
-    items: ['Machine Learning', 'Deep Learning', 'Natural Language Processing (NLP)', 'Computer Vision']
+    items: ['Machine Learning', 'Deep Learning', 'Natural Language Processing', 'Computer Vision', 'PyTorch', 'Scikit-Learn', 'Feature Engineering'],
+    gridSpan: 'md:col-span-3',
+    accent: 'bg-violet-600',
+    icon: <Brain size={18} className="text-violet-600" />
   },
   {
-    category: 'Generative AI & LLMs',
-    items: ['LangChain', 'LangGraph', 'RAG Pipelines', 'ChromaDB', 'FAISS', 'Large Language Models (LLMs)']
+    category: 'Generative AI',
+    items: ['LangChain', 'LangGraph', 'RAG Pipelines', 'ChromaDB', 'FAISS', 'LLM Fine-Tuning', 'Prompt Engineering', 'AWS Bedrock'],
+    gridSpan: 'md:col-span-3',
+    accent: 'bg-cyan-500',
+    icon: <Cpu size={18} className="text-cyan-500" />
   },
   {
-    category: 'Cloud Services & API',
-    items: ['AWS', 'AWS Bedrock', 'Azure OpenAI', 'Azure Communication Services']
+    category: 'Cloud Platforms',
+    items: ['AWS', 'AWS Bedrock', 'Azure OpenAI', 'AWS Lambda', 'Serverless Architecture'],
+    gridSpan: 'md:col-span-2',
+    accent: 'bg-indigo-500',
+    icon: <Cloud size={18} className="text-indigo-500" />
   },
   {
-    category: 'Backend & APIs',
-    items: ['Flask', 'FastAPI']
+    category: 'Backend Development',
+    items: ['Python', 'Flask', 'FastAPI', 'REST APIs', 'Node.js', 'Express.js'],
+    gridSpan: 'md:col-span-2',
+    accent: 'bg-emerald-500',
+    icon: <Code size={18} className="text-emerald-500" />
   },
   {
-    category: 'Databases',
-    items: ['MongoDB', 'MySQL']
+    category: 'Databases & Storage',
+    items: ['MongoDB', 'MySQL', 'SQLite', 'Vector DBs', 'SQL Pipelines'],
+    gridSpan: 'md:col-span-2',
+    accent: 'bg-amber-500',
+    icon: <Database size={18} className="text-amber-500" />
   }
 ];
 
@@ -37,65 +49,79 @@ const Skills = () => {
     }
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 10 },
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] }
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
     }
   };
 
   return (
-    <section id="skills" className="bg-slate-50 px-6 md:px-12 py-24 md:py-36">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
-          
-          {/* Left Block - Label */}
-          <div className="lg:col-span-4 lg:sticky lg:top-28">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-3">
-              04 / Competencies
-            </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold font-heading tracking-tight text-slate-950">
-              Technical Stack
-            </h2>
-          </div>
+    <section id="skills" className="bg-zinc-50 px-6 md:px-12 py-32 md:py-48 border-b border-zinc-100 relative overflow-hidden bg-dot-grid">
+      <div className="max-w-7xl mx-auto">
+        
+        {/* Section Header */}
+        <div className="mb-24 text-left max-w-2xl">
+          <span className="text-xs font-mono font-bold tracking-[0.2em] text-violet-600 block mb-3 uppercase">
+            // 03 / COMPETENCIES
+          </span>
+          <h2 className="text-4xl md:text-5xl font-black font-heading tracking-tighter text-zinc-950 uppercase leading-none mb-6">
+            TECHNICAL STACK
+          </h2>
+          <div className="h-[2px] bg-zinc-950 w-24 my-6" />
+          <p className="text-xs font-mono font-semibold text-zinc-400 uppercase tracking-widest leading-relaxed">
+            A premium bento grid of specialized capabilities spanning predictive architectures, generative modeling, serverless endpoints, and storage.
+          </p>
+        </div>
 
-          {/* Right Block - Skills categories */}
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-            className="lg:col-span-8 flex flex-col gap-10 text-left"
-          >
-            {skillsData.map((cat, idx) => (
-              <motion.div 
-                key={idx} 
-                variants={itemVariants}
-                className="flex flex-col gap-3.5"
-              >
-                {/* Category label */}
-                <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider">
+        {/* Bento Grid */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          className="grid grid-cols-1 md:grid-cols-6 gap-6 items-stretch"
+        >
+          {skillsData.map((cat, idx) => (
+            <motion.div
+              key={idx}
+              variants={cardVariants}
+              whileHover={{ y: -6, transition: { duration: 0.2 } }}
+              className={`border border-zinc-150 rounded-2xl p-6 md:p-8 bg-white flex flex-col justify-between transition-all duration-300 shadow-xl shadow-zinc-200/5 hover:shadow-xl hover:shadow-violet-500/[0.02] ${cat.gridSpan} group`}
+            >
+              <div>
+                {/* Header with Icon */}
+                <div className="flex justify-between items-center mb-6">
+                  <div className="p-3 bg-zinc-50 rounded-xl group-hover:bg-zinc-100 transition-colors">
+                    {cat.icon}
+                  </div>
+                  {/* Visual Accent Pill */}
+                  <div className={`w-8 h-1 rounded-full ${cat.accent} opacity-80`} />
+                </div>
+                
+                {/* Category Title */}
+                <h3 className="text-base font-bold font-heading text-zinc-950 uppercase tracking-tight mb-4">
                   {cat.category}
                 </h3>
-                
-                {/* Skill Pills */}
-                <div className="flex flex-wrap gap-2.5">
-                  {cat.items.map((item, itemIdx) => (
-                    <span 
-                      key={itemIdx}
-                      className="text-sm font-semibold text-slate-700 bg-white border border-slate-200/80 px-4 py-2 rounded-lg hover:border-slate-400 transition-colors duration-200"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+              </div>
 
-        </div>
+              {/* Elegant Tech Chips */}
+              <div className="flex flex-wrap gap-1.5 mt-4">
+                {cat.items.map((item, itemIdx) => (
+                  <span
+                    key={itemIdx}
+                    className="text-[11px] font-semibold text-zinc-600 bg-zinc-50 border border-zinc-200/60 px-3 py-2 rounded-md hover:border-zinc-400 hover:text-zinc-950 transition-all duration-250 cursor-default"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
       </div>
     </section>
   );

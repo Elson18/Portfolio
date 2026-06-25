@@ -1,84 +1,110 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { BrainCircuit, Cpu, Compass, Layout } from 'lucide-react';
 
 const About = () => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.1 }
+      transition: { staggerChildren: 0.08 }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 15 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
     }
   };
 
+  const cardsData = [
+    {
+      title: 'AI Engineer & Builder',
+      desc: 'Active builder implementing multi-agent state graphs using LangGraph, fine-tuning reasoning structures, and deploying FastAPI backends on cloud infrastructures.',
+      icon: <BrainCircuit size={18} className="text-violet-600" />
+    },
+    {
+      title: 'AIML Specialist',
+      desc: 'Academically grounded in neural networks, mathematical optimization, probabilistic models, and high-throughput dataset pipelines.',
+      icon: <Cpu size={18} className="text-cyan-600" />
+    },
+    {
+      title: 'Research Enthusiast',
+      desc: 'Deeply interested in agent reasoning models, automated clinical receptionists, and low-latency computer vision for spatial feedback.',
+      icon: <Compass size={18} className="text-amber-600" />
+    },
+    {
+      title: 'Design-First Engineering',
+      desc: 'Believer in structural simplicity. Engineering clean REST API contracts, intuitive user layouts, and efficient data structures.',
+      icon: <Layout size={18} className="text-emerald-600" />
+    }
+  ];
+
   return (
-    <section id="about" className="bg-white px-6 md:px-12 py-24 md:py-36 border-t border-slate-50">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
+    <section id="about" className="bg-zinc-50 px-6 md:px-12 py-32 md:py-48 relative border-b border-zinc-100 overflow-hidden bg-dot-grid">
+      {/* Background soft blur orb */}
+      <div className="absolute top-1/2 left-0 w-96 h-96 bg-violet-200/30 rounded-full glow-orb translate-y-[-50%] translate-x-[-50%]" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
-          {/* Left Block - Label */}
-          <div className="lg:col-span-4 lg:sticky lg:top-28">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-3">
-              01 / Core Profile
+          {/* Left Block - Minimal Section Label */}
+          <div className="lg:col-span-4 lg:sticky lg:top-28 text-left">
+            <span className="text-xs font-mono font-bold tracking-[0.2em] text-violet-600 block mb-3 uppercase">
+              // 01 / CORE PROFILE
             </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold font-heading tracking-tight text-slate-950">
-              The Story
+            <h2 className="text-4xl md:text-5xl font-black font-heading tracking-tighter text-zinc-950 uppercase leading-none mb-6">
+              THE STORY
             </h2>
+            <div className="h-[2px] bg-zinc-950 w-24 my-6" />
+            <p className="text-xs font-mono font-semibold text-zinc-400 uppercase tracking-widest leading-relaxed max-w-[240px]">
+              Translating advanced research and models into production pipelines.
+            </p>
           </div>
 
-          {/* Right Block - Description & Highlights */}
+          {/* Right Block - Massive Statement & Sub-Details */}
           <motion.div 
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-100px' }}
-            className="lg:col-span-8 flex flex-col gap-10 text-left"
+            className="lg:col-span-8 flex flex-col gap-12 text-left"
           >
-            {/* Core statement */}
+            {/* Core high-impact statement */}
             <motion.p 
               variants={itemVariants}
-              className="text-xl md:text-2xl text-slate-900 font-medium leading-relaxed font-heading"
+              className="text-2xl md:text-3xl text-zinc-900 font-bold leading-tight font-heading tracking-tight max-w-3xl"
             >
-              I design and deploy agentic AI pipelines and custom machine learning pipelines. My focus is on turning raw academic theories into robust, production-ready systems.
+              I design and deploy agentic AI orchestrations and custom ML systems. My focus is on turning raw academic theory into robust, production-ready applications with zero unnecessary weight.
             </motion.p>
 
-            {/* List coordinates */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 border-t border-slate-100">
-              <motion.div variants={itemVariants} className="flex flex-col gap-2">
-                <h3 className="text-base font-bold text-slate-900">AI Engineer & Builder</h3>
-                <p className="text-sm text-slate-500 leading-relaxed">
-                  Active builder implementing RAG architectures, orchestrating multi-agent state graphs using LangGraph, and deploying FastAPI backends on AWS.
-                </p>
-              </motion.div>
-
-              <motion.div variants={itemVariants} className="flex flex-col gap-2">
-                <h3 className="text-base font-bold text-slate-900">AIML Student</h3>
-                <p className="text-sm text-slate-500 leading-relaxed">
-                  Academically grounded in deep learning models, mathematical logic, and dataset pipeline optimization.
-                </p>
-              </motion.div>
-
-              <motion.div variants={itemVariants} className="flex flex-col gap-2">
-                <h3 className="text-base font-bold text-slate-900">Research Enthusiast</h3>
-                <p className="text-sm text-slate-500 leading-relaxed">
-                  Deeply interested in agent reasoning models, medical appointment automation, and real-time computer vision for accessibility.
-                </p>
-              </motion.div>
-
-              <motion.div variants={itemVariants} className="flex flex-col gap-2">
-                <h3 className="text-base font-bold text-slate-900">Design-First Engineering</h3>
-                <p className="text-sm text-slate-500 leading-relaxed">
-                  Believer in visual and code simplicity. Creating clean API schemas and clean frontends with zero unnecessary weight.
-                </p>
-              </motion.div>
+            {/* Grid layout matching Image 2 card style */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-10 border-t border-zinc-200/80">
+              {cardsData.map((card, idx) => (
+                <motion.div
+                  key={idx}
+                  variants={itemVariants}
+                  whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                  className="bg-white border border-zinc-150 rounded-2xl p-6 shadow-xl shadow-zinc-200/10 hover:shadow-xl hover:shadow-violet-500/[0.02] transition-all duration-300"
+                >
+                  <div className="flex gap-4 items-start">
+                    <div className="p-3 bg-zinc-50 rounded-xl">
+                      {card.icon}
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-950 font-heading">
+                        {card.title}
+                      </h3>
+                      <p className="text-sm text-zinc-500 leading-relaxed font-sans">
+                        {card.desc}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
 
