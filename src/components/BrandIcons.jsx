@@ -1,4 +1,3 @@
-import React from 'react';
 
 // Custom inline SVG icons matching Lucide's style guidelines
 export const Github = ({ size = 20, ...props }) => (

@@ -1,9 +1,10 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, AlertCircle, CheckCircle2, Copy, Check, Download } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import confetti from 'canvas-confetti';
 import { Github, Linkedin } from './BrandIcons';
+import Magnetic from './Magnetic';
 
 const Contact = () => {
   const formRef = useRef();
@@ -17,6 +18,7 @@ const Contact = () => {
   const [formErrors, setFormErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // 'success' | 'error'
+  const [copied, setCopied] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -24,6 +26,12 @@ const Contact = () => {
     if (formErrors[name]) {
       setFormErrors({ ...formErrors, [name]: '' });
     }
+  };
+
+  const copyEmailToClipboard = () => {
+    navigator.clipboard.writeText('kit27.am18@gmail.com');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   const validateForm = () => {
@@ -74,7 +82,7 @@ const Contact = () => {
           particleCount: 80,
           spread: 60,
           origin: { y: 0.8 },
-          colors: ['#2563EB', '#7C3AED', '#06B6D4']
+          colors: ['#a78bfa', '#06b6d4', '#6366f1']
         });
         setFormValues({ name: '', email: '', message: '' });
       }, 1200);
@@ -87,7 +95,7 @@ const Contact = () => {
             particleCount: 80,
             spread: 60,
             origin: { y: 0.8 },
-            colors: ['#2563EB', '#7C3AED', '#06B6D4']
+            colors: ['#a78bfa', '#06b6d4', '#6366f1']
           });
           setFormValues({ name: '', email: '', message: '' });
         })
@@ -100,40 +108,54 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="bg-white px-6 md:px-12 py-32 md:py-48 relative overflow-hidden">
-      {/* Soft background glow orb */}
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-violet-200/10 rounded-full glow-orb translate-x-[30%] translate-y-[30%]" />
-
+    <section id="contact" className="bg-white px-6 md:px-12 py-32 border-b border-slate-200 relative overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
 
           {/* Left Column - Details */}
           <div className="lg:col-span-5 flex flex-col text-left">
-            <span className="text-xs font-mono font-bold tracking-[0.2em] text-violet-600 block mb-3 uppercase">
-              // 06 / COLLABORATION
+            <span className="text-xs font-mono font-bold tracking-[0.25em] text-[#2563EB] block mb-3 uppercase">
+              // 08 / COLLABORATION GATEWAY
             </span>
-            <h2 className="text-4xl md:text-5xl font-black font-heading tracking-tighter text-zinc-950 uppercase leading-none mb-6">
+            <h2 className="text-4xl md:text-5xl font-black font-heading tracking-tighter text-[#0F172A] uppercase leading-none mb-6">
               GET IN TOUCH
             </h2>
-            <div className="h-[2px] bg-zinc-950 w-24 my-6" />
-            <p className="text-xs font-mono font-semibold text-zinc-400 uppercase tracking-widest leading-relaxed mb-8 max-w-sm">
-              I am open to projects, research cooperation, and engineering opportunities. Connect via email or social platforms.
+            <div className="h-[2px] bg-[#2563EB]/50 w-24 my-6" />
+            <p className="text-xs font-mono font-semibold text-[#64748B] uppercase tracking-widest leading-relaxed mb-8 max-w-sm">
+              I am open to engineering roles, research cooperation, and advanced ML pipelines. Connect via email or social platforms.
             </p>
 
-            <div className="flex flex-col gap-5 border-t border-zinc-150 pt-8 mt-2">
-              <a
-                href="mailto:elsonaron54@gmail.com"
-                className="text-lg font-bold text-zinc-950 hover:text-violet-600 transition-colors font-sans w-fit"
-              >
-                elsonaron54@gmail.com
-              </a>
+            <div className="flex flex-col gap-6 border-t border-slate-200 pt-8 mt-2">
+              <div className="flex flex-col gap-2">
+                <span className="text-[10px] font-mono font-bold text-[#64748B] uppercase tracking-widest">
+                  Direct Channel
+                </span>
+                
+                {/* Magnetic copy wrapper */}
+                <div className="flex items-center gap-3">
+                  <span className="text-lg md:text-xl font-bold text-[#0F172A] font-sans">
+                    kit27.am18@gmail.com
+                  </span>
+                  
+                  <Magnetic range={40} strength={0.3}>
+                    <button
+                      onClick={copyEmailToClipboard}
+                      className="p-2.5 bg-slate-50 hover:bg-slate-100 text-slate-500 hover:text-slate-900 rounded-full transition-all border border-slate-200 cursor-pointer flex items-center justify-center"
+                      title="Copy email to clipboard"
+                    >
+                      {copied ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
+                    </button>
+                  </Magnetic>
+                </div>
+              </div>
 
+              {/* Social Channels */}
               <div className="flex flex-wrap gap-4 items-center mt-2">
                 <a
                   href="www.linkedin.com/in/elson-benanzal-7451b129a"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-xs font-mono font-bold text-zinc-400 hover:text-zinc-950 uppercase tracking-wider transition-colors duration-200"
+                  className="flex items-center gap-1.5 text-xs font-mono font-bold text-[#64748B] hover:text-[#2563EB] uppercase tracking-wider transition-colors duration-250"
                 >
                   <Linkedin size={13} />
                   <span>LinkedIn</span>
@@ -142,7 +164,7 @@ const Contact = () => {
                   href="https://github.com/Elson18"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-xs font-mono font-bold text-zinc-400 hover:text-zinc-950 uppercase tracking-wider transition-colors duration-200"
+                  className="flex items-center gap-1.5 text-xs font-mono font-bold text-[#64748B] hover:text-[#2563EB] uppercase tracking-wider transition-colors duration-250"
                 >
                   <Github size={13} />
                   <span>GitHub</span>
@@ -151,30 +173,44 @@ const Contact = () => {
                   href="https://leetcode.com/Elson18/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs font-mono font-bold text-zinc-400 hover:text-zinc-950 uppercase tracking-wider transition-colors duration-200"
+                  className="text-xs font-mono font-bold text-[#64748B] hover:text-[#2563EB] uppercase tracking-wider transition-colors duration-250"
                 >
                   LeetCode
                 </a>
                 <a
-                  href="https://codechef.com/users/elsonbenanzal"
+                  href="https://codechef.com/users/elson18"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs font-mono font-bold text-zinc-400 hover:text-zinc-950 uppercase tracking-wider transition-colors duration-200"
+                  className="text-xs font-mono font-bold text-[#64748B] hover:text-[#2563EB] uppercase tracking-wider transition-colors duration-250"
                 >
                   CodeChef
                 </a>
+              </div>
+
+              {/* Resume download button */}
+              <div className="mt-4">
+                <Magnetic range={50} strength={0.25}>
+                  <a
+                    href="/assets/Elson_Benanzal_Resume.pdf"
+                    download="Elson_Benanzal_Resume.pdf"
+                    className="inline-flex items-center gap-2 text-xs font-mono font-semibold text-[#0F172A] bg-slate-50 border border-slate-200 hover:bg-slate-900 hover:text-white px-6 py-3.5 rounded-full transition-all duration-300 shadow-md"
+                  >
+                    <Download size={13} className="text-[#2563EB]" />
+                    <span>Download CV</span>
+                  </a>
+                </Magnetic>
               </div>
             </div>
           </div>
 
           {/* Right Column - Contact Form */}
           <div className="lg:col-span-7 w-full">
-            <div className="border border-zinc-150 rounded-2xl p-6 md:p-8 bg-zinc-50 shadow-xl shadow-zinc-200/5">
+            <div className="bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-xl shadow-slate-100/40">
               <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-6 text-left">
 
                 {/* Name */}
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="name" className="text-[10px] font-mono font-bold text-zinc-450 uppercase tracking-widest">
+                  <label htmlFor="name" className="text-[10px] font-mono font-bold text-[#64748B] uppercase tracking-widest">
                     Your Name
                   </label>
                   <input
@@ -185,9 +221,9 @@ const Contact = () => {
                     onChange={handleInputChange}
                     disabled={loading}
                     placeholder="John Doe"
-                    className={`w-full bg-white border rounded-xl py-3 px-4 focus:outline-none focus:ring-1 transition-all text-zinc-950 placeholder-zinc-300 font-sans text-sm ${formErrors.name
-                      ? 'border-red-300 focus:border-red-400 focus:ring-red-400'
-                      : 'border-zinc-200 focus:border-zinc-950 focus:ring-zinc-950'
+                    className={`w-full bg-slate-50 border rounded-xl py-3.5 px-4 focus:outline-none focus:ring-1 transition-all text-[#0F172A] placeholder-slate-400 font-sans text-sm ${formErrors.name
+                      ? 'border-red-500/50 focus:border-red-400 focus:ring-red-400'
+                      : 'border-slate-200 focus:border-[#2563EB] focus:ring-[#2563EB]'
                       }`}
                   />
                   {formErrors.name && (
@@ -200,7 +236,7 @@ const Contact = () => {
 
                 {/* Email */}
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="email" className="text-[10px] font-mono font-bold text-zinc-450 uppercase tracking-widest">
+                  <label htmlFor="email" className="text-[10px] font-mono font-bold text-[#64748B] uppercase tracking-widest">
                     Your Email
                   </label>
                   <input
@@ -211,9 +247,9 @@ const Contact = () => {
                     onChange={handleInputChange}
                     disabled={loading}
                     placeholder="john@example.com"
-                    className={`w-full bg-white border rounded-xl py-3 px-4 focus:outline-none focus:ring-1 transition-all text-zinc-950 placeholder-zinc-300 font-sans text-sm ${formErrors.email
-                      ? 'border-red-300 focus:border-red-400 focus:ring-red-400'
-                      : 'border-zinc-200 focus:border-zinc-950 focus:ring-zinc-950'
+                    className={`w-full bg-slate-50 border rounded-xl py-3.5 px-4 focus:outline-none focus:ring-1 transition-all text-[#0F172A] placeholder-slate-400 font-sans text-sm ${formErrors.email
+                      ? 'border-red-500/50 focus:border-red-400 focus:ring-red-400'
+                      : 'border-slate-200 focus:border-[#2563EB] focus:ring-[#2563EB]'
                       }`}
                   />
                   {formErrors.email && (
@@ -226,7 +262,7 @@ const Contact = () => {
 
                 {/* Message */}
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="message" className="text-[10px] font-mono font-bold text-zinc-450 uppercase tracking-widest">
+                  <label htmlFor="message" className="text-[10px] font-mono font-bold text-[#64748B] uppercase tracking-widest">
                     Message
                   </label>
                   <textarea
@@ -237,9 +273,9 @@ const Contact = () => {
                     onChange={handleInputChange}
                     disabled={loading}
                     placeholder="Describe details of collaboration or queries here..."
-                    className={`w-full bg-white border rounded-xl py-3 px-4 focus:outline-none focus:ring-1 transition-all text-zinc-950 placeholder-zinc-300 font-sans text-sm resize-none ${formErrors.message
-                      ? 'border-red-300 focus:border-red-400 focus:ring-red-400'
-                      : 'border-zinc-200 focus:border-zinc-950 focus:ring-zinc-950'
+                    className={`w-full bg-slate-50 border rounded-xl py-3.5 px-4 focus:outline-none focus:ring-1 transition-all text-[#0F172A] placeholder-slate-400 font-sans text-sm resize-none ${formErrors.message
+                      ? 'border-red-500/50 focus:border-red-400 focus:ring-red-400'
+                      : 'border-slate-200 focus:border-[#2563EB] focus:ring-[#2563EB]'
                       }`}
                   />
                   {formErrors.message && (
@@ -257,10 +293,10 @@ const Contact = () => {
                       initial={{ opacity: 0, y: 5 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 5 }}
-                      className="flex items-center gap-2 text-xs font-bold text-green-600 bg-green-50 border border-green-100 rounded-xl px-4 py-3"
+                      className="flex items-center gap-2 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3"
                     >
-                      <CheckCircle2 size={14} />
-                      <span>MESSAGE SENT SUCCESSFULY. THANK YOU.</span>
+                      <CheckCircle2 size={14} className="text-emerald-600" />
+                      <span>MESSAGE SENT SUCCESSFULLY. THANK YOU.</span>
                     </motion.div>
                   )}
                   {submitStatus === 'error' && (
@@ -268,32 +304,36 @@ const Contact = () => {
                       initial={{ opacity: 0, y: 5 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 5 }}
-                      className="flex items-center gap-2 text-xs font-bold text-red-600 bg-red-50 border border-red-100 rounded-xl px-4 py-3"
+                      className="flex items-center gap-2 text-xs font-bold text-red-700 bg-red-50 border border-red-200 rounded-xl px-4 py-3"
                     >
-                      <AlertCircle size={14} />
+                      <AlertCircle size={14} className="text-red-600" />
                       <span>TRANSMISSION ERROR. PLEASE RETRY.</span>
                     </motion.div>
                   )}
                 </AnimatePresence>
 
                 {/* Submit */}
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full inline-flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wider text-white bg-zinc-950 hover:bg-zinc-900 border border-zinc-950 px-6 py-4.5 rounded-full shadow-lg shadow-zinc-950/10 disabled:opacity-50 transition-colors duration-250 mt-2 cursor-pointer"
-                >
-                  {loading ? (
-                    <>
-                      <div className="w-3.5 h-3.5 rounded-full border-2 border-white/30 border-t-white animate-spin" />
-                      <span>Transmitting...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Send Message</span>
-                      <ArrowRight size={14} />
-                    </>
-                  )}
-                </button>
+                <div className="w-full mt-2">
+                  <Magnetic range={50} strength={0.2} className="w-full">
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full inline-flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wider text-white bg-slate-900 hover:bg-slate-800 px-6 py-4.5 rounded-full shadow-lg disabled:opacity-50 transition-colors duration-250 cursor-pointer"
+                    >
+                      {loading ? (
+                        <>
+                          <div className="w-3.5 h-3.5 rounded-full border-2 border-white/30 border-t-white animate-spin" />
+                          <span>Transmitting...</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>Send Message</span>
+                          <ArrowRight size={14} />
+                        </>
+                      )}
+                    </button>
+                  </Magnetic>
+                </div>
 
               </form>
             </div>

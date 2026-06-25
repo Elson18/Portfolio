@@ -1,126 +1,79 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Brain, Cpu, Cloud, Database, Code } from 'lucide-react';
+import SkillPillsRow from './SkillPillsRow';
 
-const skillsData = [
+const marqueeRows = [
   {
-    category: 'AI & Machine Learning',
-    items: ['Machine Learning', 'Deep Learning', 'Natural Language Processing', 'Computer Vision', 'PyTorch', 'Scikit-Learn', 'Feature Engineering'],
-    gridSpan: 'md:col-span-3',
-    accent: 'bg-violet-600',
-    icon: <Brain size={18} className="text-violet-600" />
+    category: 'AI, Machine Learning & Vision',
+    speed: '28s',
+    direction: 'left',
+    accentColor: 'border-brand-primary/20 text-brand-primary bg-brand-primary/5',
+    skills: [
+      { name: 'Machine Learning', desc: 'Predictive modeling, classification, and statistical classifiers' },
+      { name: 'Deep Learning', desc: 'Neural network architectures, weights training, and convolution layers' },
+      { name: 'Computer Vision', desc: 'YOLOv8 real-time object tracking, localization, and pose estimation' },
+      { name: 'Generative AI', desc: 'LangGraph stateful graphs, autonomous agents, and OpenAI endpoints' },
+      { name: 'LLMs', desc: 'Model configurations, quantized GPT-4o pipelines, and prompt parameters' },
+      { name: 'RAG Systems', desc: 'Advanced search indexing, vector databases, and document chunking' },
+      { name: 'Data Science', desc: 'Exploratory data baselines and high-dimensional features analysis' }
+    ]
   },
   {
-    category: 'Generative AI',
-    items: ['LangChain', 'LangGraph', 'RAG Pipelines', 'ChromaDB', 'FAISS', 'LLM Fine-Tuning', 'Prompt Engineering', 'AWS Bedrock'],
-    gridSpan: 'md:col-span-3',
-    accent: 'bg-cyan-500',
-    icon: <Cpu size={18} className="text-cyan-500" />
-  },
-  {
-    category: 'Cloud Platforms',
-    items: ['AWS', 'AWS Bedrock', 'Azure OpenAI', 'AWS Lambda', 'Serverless Architecture'],
-    gridSpan: 'md:col-span-2',
-    accent: 'bg-indigo-500',
-    icon: <Cloud size={18} className="text-indigo-500" />
-  },
-  {
-    category: 'Backend Development',
-    items: ['Python', 'Flask', 'FastAPI', 'REST APIs', 'Node.js', 'Express.js'],
-    gridSpan: 'md:col-span-2',
-    accent: 'bg-emerald-500',
-    icon: <Code size={18} className="text-emerald-500" />
-  },
-  {
-    category: 'Databases & Storage',
-    items: ['MongoDB', 'MySQL', 'SQLite', 'Vector DBs', 'SQL Pipelines'],
-    gridSpan: 'md:col-span-2',
-    accent: 'bg-amber-500',
-    icon: <Database size={18} className="text-amber-500" />
+    category: 'Languages, Databases & Tools',
+    speed: '32s',
+    direction: 'right',
+    accentColor: 'border-brand-accent/20 text-brand-accent bg-brand-accent/5',
+    skills: [
+      { name: 'Python', desc: 'Core language for backend automation, vision pipelines, and deep models' },
+      { name: 'FastAPI', desc: 'Asynchronous microservice endpoints and secure API routing' },
+      { name: 'React.js', desc: 'Modular layouts, custom interactive components, and state flows' },
+      { name: 'Node.js', desc: 'Scalable service endpoints and server layers' },
+      { name: 'MongoDB', desc: 'NoSQL document storage and flexible database queries' },
+      { name: 'Docker', desc: 'Containerized deployment packages and reproducible execution steps' },
+      { name: 'Git', desc: 'Collaborative code repository tracking and branch integrations' },
+      { name: 'Cloud Platforms', desc: 'Azure Realtime API, AWS Bedrock, and serverless compute functions' }
+    ]
   }
 ];
 
 const Skills = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.08 }
-    }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
-    }
-  };
-
   return (
-    <section id="skills" className="bg-zinc-50 px-6 md:px-12 py-32 md:py-48 border-b border-zinc-100 relative overflow-hidden bg-dot-grid">
-      <div className="max-w-7xl mx-auto">
+    <section id="skills" className="bg-transparent px-6 md:px-12 py-32 md:py-48 border-b border-border relative overflow-hidden">
+      <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Section Header */}
         <div className="mb-24 text-left max-w-2xl">
-          <span className="text-xs font-mono font-bold tracking-[0.2em] text-violet-600 block mb-3 uppercase">
-            // 03 / COMPETENCIES
+          <span className="text-xs font-mono font-bold tracking-[0.25em] text-brand-primary block mb-3 uppercase">
+            // 06 / SPECIALIZED TECHNICAL ARSENAL
           </span>
-          <h2 className="text-4xl md:text-5xl font-black font-heading tracking-tighter text-zinc-950 uppercase leading-none mb-6">
-            TECHNICAL STACK
+          <h2 className="text-4xl md:text-5xl font-black font-heading tracking-tighter text-text uppercase leading-none mb-6">
+            CAPABILITIES
           </h2>
-          <div className="h-[2px] bg-zinc-950 w-24 my-6" />
-          <p className="text-xs font-mono font-semibold text-zinc-400 uppercase tracking-widest leading-relaxed">
-            A premium bento grid of specialized capabilities spanning predictive architectures, generative modeling, serverless endpoints, and storage.
+          <div className="h-[2px] bg-brand-primary/50 w-24 my-6" />
+          <p className="text-xs font-mono font-semibold text-text-muted uppercase tracking-widest leading-relaxed">
+            Multi-layered marquee of technologies spanning predictive architectures, stateful agent orchestrations, endpoints, and storage.
           </p>
         </div>
 
-        {/* Bento Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          className="grid grid-cols-1 md:grid-cols-6 gap-6 items-stretch"
-        >
-          {skillsData.map((cat, idx) => (
-            <motion.div
-              key={idx}
-              variants={cardVariants}
-              whileHover={{ y: -6, transition: { duration: 0.2 } }}
-              className={`border border-zinc-150 rounded-2xl p-6 md:p-8 bg-white flex flex-col justify-between transition-all duration-300 shadow-xl shadow-zinc-200/5 hover:shadow-xl hover:shadow-violet-500/[0.02] ${cat.gridSpan} group`}
-            >
-              <div>
-                {/* Header with Icon */}
-                <div className="flex justify-between items-center mb-6">
-                  <div className="p-3 bg-zinc-50 rounded-xl group-hover:bg-zinc-100 transition-colors">
-                    {cat.icon}
-                  </div>
-                  {/* Visual Accent Pill */}
-                  <div className={`w-8 h-1 rounded-full ${cat.accent} opacity-80`} />
-                </div>
-                
-                {/* Category Title */}
-                <h3 className="text-base font-bold font-heading text-zinc-950 uppercase tracking-tight mb-4">
-                  {cat.category}
-                </h3>
+        {/* Marquee Rows Container */}
+        <div className="flex flex-col gap-10 marquee-container relative py-4">
+          {marqueeRows.map((row, rowIdx) => (
+            <div key={rowIdx} className="flex flex-col gap-3 relative">
+              {/* Row Label */}
+              <div className="flex items-center gap-2 px-1">
+                <span className="text-[9px] font-mono font-bold tracking-widest text-text-muted uppercase">
+                  {row.category}
+                </span>
+                <div className="h-[1px] bg-border flex-grow opacity-45" />
               </div>
 
-              {/* Elegant Tech Chips */}
-              <div className="flex flex-wrap gap-1.5 mt-4">
-                {cat.items.map((item, itemIdx) => (
-                  <span
-                    key={itemIdx}
-                    className="text-[11px] font-semibold text-zinc-600 bg-zinc-50 border border-zinc-200/60 px-3 py-2 rounded-md hover:border-zinc-400 hover:text-zinc-950 transition-all duration-250 cursor-default"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
+              {/* Skill Marquee Pills Row */}
+              <SkillPillsRow 
+                skills={row.skills} 
+                direction={row.direction} 
+                speed={row.speed} 
+              />
+            </div>
           ))}
-        </motion.div>
+        </div>
 
       </div>
     </section>

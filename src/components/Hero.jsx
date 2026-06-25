@@ -1,8 +1,22 @@
-import React from 'react';
-import { ArrowRight, Sparkles, Cpu, Trophy, Layers, BookOpen } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { useEffect } from 'react';
+import { ArrowRight, Sparkles, Cpu, Trophy, Layers, BookOpen, ChevronDown } from 'lucide-react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 const Hero = () => {
+  // Parallax offsets
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  const springConfig = { damping: 50, stiffness: 200, mass: 0.5 };
+  const smoothX = useSpring(mouseX, springConfig);
+  const smoothY = useSpring(mouseY, springConfig);
+  
+  // Parallax transforms for background glow positions and elements
+  const bgTranslateX = useTransform(smoothX, [-0.5, 0.5], [-15, 15]);
+  const bgTranslateY = useTransform(smoothY, [-0.5, 0.5], [-15, 15]);
+  const pillTranslateX = useTransform(smoothX, [-0.5, 0.5], [-35, 35]);
+  const pillTranslateY = useTransform(smoothY, [-0.5, 0.5], [-35, 35]);
+
   const handleScrollTo = (e, id) => {
     e.preventDefault();
     const element = document.getElementById(id);
@@ -14,19 +28,45 @@ const Hero = () => {
     }
   };
 
+  // Spotlight coordinates handler (GPU)
+  const handleSpotlightMouseMove = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+    card.style.setProperty('--mouse-active', '1');
+  };
+
+  const handleSpotlightMouseLeave = (e) => {
+    e.currentTarget.style.setProperty('--mouse-active', '0');
+  };
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      const { clientX, clientY } = e;
+      const { innerWidth, innerHeight } = window;
+      const xPercent = (clientX / innerWidth) - 0.5;
+      const yPercent = (clientY / innerHeight) - 0.5;
+      mouseX.set(xPercent);
+      mouseY.set(yPercent);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [mouseX, mouseY]);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
+      transition: { staggerChildren: 0.1, delayChildren: 0.1 }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 35 },
     visible: {
       opacity: 1,
       y: 0,
@@ -39,87 +79,94 @@ const Hero = () => {
       number: '1,000+',
       label: 'SOLVED PROBLEMS',
       sub: 'LeetCode & CodeChef',
-      icon: <Cpu size={24} className="text-violet-500" />,
-      delay: 0.4
+      icon: <Cpu size={20} className="text-brand-primary animate-pulse" />,
+      delay: 0.3
     },
     {
       number: '5',
       label: 'HACKATHONS',
       sub: 'Finalist & Winner',
-      icon: <Trophy size={24} className="text-amber-500" />,
-      delay: 0.5
+      icon: <Trophy size={20} className="text-amber-500" />,
+      delay: 0.4
     },
     {
       number: '95%',
       label: 'RAG ACCURACY',
       sub: 'Semantic Retrieval',
-      icon: <Layers size={24} className="text-cyan-500" />,
-      delay: 0.6
+      icon: <Layers size={20} className="text-brand-accent" />,
+      delay: 0.5
     },
     {
       number: '45%',
       label: 'MATCHING SPEED',
       sub: 'Onboarding Reduction',
-      icon: <BookOpen size={24} className="text-emerald-500" />,
-      delay: 0.7
+      icon: <BookOpen size={20} className="text-emerald-500" />,
+      delay: 0.6
     }
   ];
 
   return (
-    <section id="home" className="min-h-screen flex flex-col justify-between bg-zinc-950 text-white pt-32 pb-16 px-6 md:px-12 relative overflow-hidden bg-dot-grid-dark">
-      {/* Glow Orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-violet-600/10 rounded-full glow-orb" />
-      <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-cyan-500/5 rounded-full glow-orb" />
+    <section 
+      id="home" 
+      className="min-h-screen flex flex-col justify-between bg-transparent text-text pt-36 pb-20 px-6 md:px-12 relative overflow-hidden"
+    >
+      {/* Dynamic Background Blur Orbs (Dark Mode Only) */}
+      <motion.div 
+        style={{ x: bgTranslateX, y: bgTranslateY }}
+        className="absolute top-[10%] left-[10%] w-[500px] h-[500px] bg-brand-primary/5 rounded-full glow-orb hidden dark:block" 
+      />
+      <motion.div 
+        style={{ x: bgTranslateX, y: bgTranslateY }}
+        className="absolute bottom-[20%] right-[10%] w-[450px] h-[450px] bg-brand-accent/5 rounded-full glow-orb hidden dark:block" 
+      />
 
-      <div className="max-w-7xl mx-auto w-full flex-grow flex flex-col justify-center items-center text-center relative z-10 py-12">
+      <div className="max-w-7xl mx-auto w-full flex-grow flex flex-col justify-center items-center text-center relative z-10 py-8">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="flex flex-col items-center max-w-5xl"
         >
-          {/* Tagline Indicator */}
+          {/* Badge indicator */}
           <motion.div 
             variants={itemVariants} 
-            className="inline-flex items-center gap-2 bg-zinc-900 border border-zinc-800 px-4 py-2 rounded-full mb-8"
+            className="inline-flex items-center gap-2 bg-card border border-border px-4 py-2 rounded-full mb-8 shadow-sm"
           >
-            <Sparkles size={14} className="text-violet-400 animate-pulse" />
-            <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-zinc-400 uppercase">
+            <Sparkles size={13} className="text-brand-primary animate-pulse" />
+            <span className="text-[10px] font-mono font-bold tracking-[0.25em] text-text-muted uppercase">
               AI Engineer Intern @ Cloud Destinations
             </span>
           </motion.div>
 
-          {/* Big Bold Headline with Floating Pills */}
+          {/* Title with Parallax Floating Pills */}
           <div className="relative mb-8">
-            {/* Left Floating Pill */}
+            {/* Left Pill */}
             <motion.div 
-              initial={{ opacity: 0, x: -20, rotate: -6 }}
-              animate={{ opacity: 1, x: 0, rotate: -6 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              className="absolute -top-12 -left-8 md:-left-20 bg-violet-500 text-white text-[10px] font-bold tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-lg shadow-violet-500/20"
+              style={{ x: pillTranslateX, y: pillTranslateY }}
+              initial={{ opacity: 0, x: -30, rotate: -6 }}
+              animate={{ opacity: 1, rotate: -6 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="absolute -top-12 -left-12 md:-left-24 bg-brand-primary border border-brand-primary/20 text-white text-[10px] font-mono tracking-widest py-1.5 px-4 rounded-full flex items-center gap-2 shadow-lg"
             >
-              <span>Agentic</span>
-              <svg width="6" height="6" viewBox="0 0 6 6" fill="none" className="inline-block">
-                <circle cx="3" cy="3" r="3" fill="white" />
-              </svg>
+              <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
+              <span>AGENTIC_AI</span>
             </motion.div>
 
-            {/* Right Floating Pill */}
+            {/* Right Pill */}
             <motion.div 
-              initial={{ opacity: 0, x: 20, rotate: 6 }}
-              animate={{ opacity: 1, x: 0, rotate: 6 }}
-              transition={{ delay: 0.7, duration: 0.8 }}
-              className="absolute -bottom-4 -right-8 md:-right-16 bg-cyan-500 text-zinc-950 text-[10px] font-bold tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-lg shadow-cyan-500/20"
+              style={{ x: pillTranslateX, y: pillTranslateY }}
+              initial={{ opacity: 0, x: 30, rotate: 6 }}
+              animate={{ opacity: 1, rotate: 6 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className="absolute -bottom-6 -right-12 md:-right-20 bg-card border border-border text-brand-accent text-[10px] font-mono tracking-widest py-1.5 px-4 rounded-full flex items-center gap-2 shadow-md"
             >
-              <span>Stateful</span>
-              <svg width="6" height="6" viewBox="0 0 6 6" fill="none" className="inline-block">
-                <circle cx="3" cy="3" r="3" fill="#09090b" />
-              </svg>
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
+              <span>STATEFUL_NODES</span>
             </motion.div>
 
             <motion.h1 
               variants={itemVariants}
-              className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black font-heading tracking-tighter leading-[0.9] text-gradient-purple uppercase"
+              className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black font-heading tracking-tighter leading-[0.9] text-gradient-purple uppercase"
             >
               Intelligent<br />
               AI Pipelines
@@ -129,25 +176,26 @@ const Hero = () => {
           {/* Description */}
           <motion.p 
             variants={itemVariants}
-            className="text-base sm:text-lg md:text-xl text-zinc-400 max-w-2xl leading-relaxed mb-10 font-sans"
+            className="text-base sm:text-lg md:text-xl text-text-muted max-w-2xl leading-relaxed mb-12 font-sans px-4"
           >
             I architect stateful agent networks, fine-tune neural model pipelines, and build production-ready machine learning infrastructures.
           </motion.p>
 
           {/* Action triggers */}
-          <motion.div variants={itemVariants} className="flex flex-wrap gap-4 items-center justify-center">
+          <motion.div variants={itemVariants} className="flex flex-wrap gap-4 items-center justify-center relative z-20">
             <a
-              href="#projects"
-              onClick={(e) => handleScrollTo(e, 'projects')}
-              className="inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-wider text-zinc-950 bg-white hover:bg-zinc-100 px-7 py-4.5 rounded-full transition-all duration-300 shadow-xl shadow-white/5 group cursor-pointer"
+              href="#playground"
+              onClick={(e) => handleScrollTo(e, 'playground')}
+              className="inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-wider text-bg bg-text hover:opacity-90 px-8 py-5 rounded-full transition-all duration-300 shadow-xl group cursor-pointer"
             >
-              <span>Explore Projects</span>
+              <span>Explore Ecosystem</span>
               <ArrowRight size={14} className="transform group-hover:translate-x-1 transition-transform" />
             </a>
+            
             <a
               href="#contact"
               onClick={(e) => handleScrollTo(e, 'contact')}
-              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white border border-zinc-800 hover:border-zinc-500 px-7 py-4.5 rounded-full bg-zinc-900/50 hover:bg-zinc-900 transition-all duration-300 cursor-pointer"
+              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-text border border-border bg-card/40 hover:bg-card px-8 py-5 rounded-full transition-all duration-300 shadow-lg cursor-pointer"
             >
               <span>Let's Connect</span>
             </a>
@@ -155,32 +203,52 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Overlapping metric cards at bottom */}
+      {/* Floating Scroll Indicator */}
+      <div className="flex flex-col items-center justify-center mb-8 relative z-10">
+        <a 
+          href="#about"
+          onClick={(e) => handleScrollTo(e, 'about')}
+          className="text-text-muted hover:text-text flex flex-col items-center gap-2 text-[10px] font-mono tracking-widest uppercase transition-colors"
+        >
+          <span>Scroll Down</span>
+          <motion.div
+            animate={{ y: [0, 6, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+          >
+            <ChevronDown size={14} className="text-brand-primary" />
+          </motion.div>
+        </a>
+      </div>
+
+      {/* Metrics container with glassmorphic spotlights */}
       <div className="max-w-7xl mx-auto w-full relative z-20 pb-4">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 metric-card-overlap">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {metrics.map((m, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: m.delay, duration: 0.6, ease: 'easeOut' }}
+              transition={{ delay: m.delay, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               whileHover={{ y: -6, transition: { duration: 0.2 } }}
-              className="bg-white border border-zinc-150 rounded-2xl p-5 md:p-6 text-left flex flex-col justify-between h-36 md:h-40 shadow-xl shadow-black/[0.03] card-glow-violet group cursor-default"
+              onMouseMove={handleSpotlightMouseMove}
+              onMouseLeave={handleSpotlightMouseLeave}
+              className="spotlight-card glass-card rounded-2xl p-5 md:p-6 text-left flex flex-col justify-between h-36 md:h-40 shadow-sm transition-all duration-300 group cursor-default"
             >
-              <div className="flex justify-between items-start">
-                <span className="text-3xl md:text-4xl font-black font-heading text-zinc-900 tracking-tight leading-none group-hover:text-violet-600 transition-colors">
+              <div className="flex justify-between items-start relative z-10">
+                <span className="text-3xl md:text-4xl font-black font-heading text-text tracking-tight leading-none group-hover:text-brand-primary transition-colors">
                   {m.number}
                 </span>
-                <div className="p-2 bg-zinc-50 rounded-xl group-hover:bg-violet-50 transition-colors">
+                <div className="p-2.5 bg-bg/85 border border-border rounded-xl group-hover:border-brand-primary/30 transition-all duration-300">
                   {m.icon}
                 </div>
               </div>
-              <div className="flex flex-col">
-                <span className="text-[10px] font-bold tracking-widest text-zinc-950 font-heading">
+              
+              <div className="flex flex-col relative z-10">
+                <span className="text-[10px] font-bold tracking-widest text-text font-heading">
                   {m.label}
                 </span>
-                <span className="text-[10px] font-medium text-zinc-400 mt-0.5">
+                <span className="text-[10px] font-medium text-text-muted mt-1 font-sans">
                   {m.sub}
                 </span>
               </div>

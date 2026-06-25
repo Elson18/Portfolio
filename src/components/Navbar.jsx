@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { Github, Linkedin } from './BrandIcons';
+import Magnetic from './Magnetic';
 
 const navLinks = [
   { name: 'About', href: '#about' },
-  { name: 'Experience', href: '#experience' },
+  { name: 'Chronology', href: '#chronology' },
+  { name: 'Architecture', href: '#architecture' },
+  { name: 'Playground', href: '#playground' },
   { name: 'Projects', href: '#projects' },
   { name: 'Skills', href: '#skills' },
   { name: 'Achievements', href: '#achievements' },
@@ -18,7 +21,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 40);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -37,89 +40,83 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-550 ${scrolled
-        ? 'bg-zinc-950/85 backdrop-blur-md border-b border-zinc-900/50 py-3.5 shadow-lg shadow-black/10'
-        : 'bg-transparent py-6'
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled
+        ? 'bg-card/85 backdrop-blur-md border-b border-border py-3 shadow-lg shadow-black/10'
+        : 'bg-transparent py-5'
       }`}>
-      <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-3 items-center">
-        {/* Left Side: Desktop Social Links */}
-        <div className="hidden lg:flex items-center gap-6">
-          <a
-            href="www.linkedin.com/in/elson-benanzal-7451b129a"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[11px] font-mono font-semibold uppercase tracking-wider text-zinc-400 hover:text-white transition-colors duration-250 flex items-center gap-1 group"
-          >
-            LinkedIn <ArrowUpRight size={10} className="opacity-50 group-hover:opacity-100 transition-opacity" />
-          </a>
-          <a
-            href="https://github.com/elsonbenanzal"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[11px] font-mono font-semibold uppercase tracking-wider text-zinc-400 hover:text-white transition-colors duration-250 flex items-center gap-1 group"
-          >
-            GitHub <ArrowUpRight size={10} className="opacity-50 group-hover:opacity-100 transition-opacity" />
-          </a>
-          <a
-            href="https://leetcode.com/elsonbenanzal"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[11px] font-mono font-semibold uppercase tracking-wider text-zinc-400 hover:text-white transition-colors duration-250"
-          >
-            LeetCode
-          </a>
-        </div>
-
-        {/* Mobile Spacer / Mobile Social Toggle Placeholder */}
-        <div className="lg:hidden flex items-center">
-          <a
-            href="#about"
-            onClick={(e) => handleLinkClick(e, '#about')}
-            className="text-xs font-mono font-bold tracking-wider text-zinc-400 hover:text-white transition-colors"
-          >
-            // ME.
-          </a>
-        </div>
-
-        {/* Center: Brand Logo */}
-        <div className="flex justify-center">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+        
+        {/* Left Side: Desktop Logo */}
+        <div className="flex items-center">
           <a
             href="#home"
             onClick={(e) => handleLinkClick(e, '#home')}
-            className="text-xl font-black font-heading tracking-tighter text-white hover:opacity-80 transition-opacity duration-200"
+            className="text-lg font-black font-heading tracking-tighter text-text hover:opacity-80 transition-opacity duration-200"
           >
             Elson Benanzal A<span className="text-brand-primary">.</span>
           </a>
         </div>
 
-        {/* Right Side: Navigation Trigger / Desktop Menu */}
-        <div className="flex justify-end items-center gap-6">
-          {/* Desktop Nav Items */}
-          <div className="hidden lg:flex items-center gap-6">
-            {navLinks.slice(0, 4).map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => handleLinkClick(e, link.href)}
-                className="text-xs font-semibold uppercase tracking-wider text-zinc-350 hover:text-white transition-colors duration-200"
-              >
-                {link.name}
-              </a>
-            ))}
+        {/* Center: Desktop Navigation Items */}
+        <div className="hidden xl:flex items-center gap-6">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              onClick={(e) => handleLinkClick(e, link.href)}
+              className="text-[10px] font-mono font-bold uppercase tracking-[0.15em] text-text-muted hover:text-text transition-colors duration-200"
+            >
+              {link.name}
+            </a>
+          ))}
+        </div>
+
+        {/* Right Side: Social links + Theme Toggle + Resume Button */}
+        <div className="hidden lg:flex items-center gap-5">
+          <div className="flex items-center gap-4 border-r border-border pr-5">
+            <a
+              href="www.linkedin.com/in/elson-benanzal-7451b129a"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[10px] font-mono font-semibold uppercase tracking-wider text-text-muted hover:text-text transition-colors duration-200 flex items-center gap-1 group"
+            >
+              LinkedIn <ArrowUpRight size={10} className="opacity-50 group-hover:opacity-100 transition-opacity" />
+            </a>
+            
+            <a
+              href="https://github.com/Elson18"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[10px] font-mono font-semibold uppercase tracking-wider text-text-muted hover:text-text transition-colors duration-200 flex items-center gap-1 group"
+            >
+              GitHub <ArrowUpRight size={10} className="opacity-50 group-hover:opacity-100 transition-opacity" />
+            </a>
           </div>
 
+          <Magnetic range={40} strength={0.3}>
+            <a
+              href="/assets/Elson_Benanzal_Resume.pdf"
+              download="Elson_Benanzal_Resume.pdf"
+              className="inline-flex items-center justify-center text-xs font-mono font-bold text-text bg-card border border-border px-5 py-2.5 rounded-full hover:bg-text hover:text-bg transition-all duration-300 shadow-sm"
+            >
+              Resume
+            </a>
+          </Magnetic>
+        </div>
+
+        {/* Mobile Hamburguer trigger */}
+        <div className="xl:hidden flex items-center gap-3">
           <a
             href="/assets/Elson_Benanzal_Resume.pdf"
             download="Elson_Benanzal_Resume.pdf"
-            className="hidden sm:inline-flex items-center justify-center text-xs font-mono font-semibold text-white bg-zinc-900 border border-zinc-800 px-4 py-2 rounded-full hover:bg-white hover:text-zinc-950 transition-all duration-300 shadow-sm shadow-black/5"
+            className="inline-flex xl:hidden items-center justify-center text-[10px] font-mono font-bold text-text bg-card border border-border px-3.5 py-2 rounded-full hover:bg-text hover:text-bg transition-all duration-300"
           >
-            Resume
+            CV
           </a>
-
-          {/* Mobile Hamburguer menu */}
+          
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden text-zinc-300 hover:text-white focus:outline-none transition-colors"
+            className="text-text-muted hover:text-text focus:outline-none transition-colors cursor-pointer"
             aria-label="Toggle menu"
           >
             {isOpen ? <X size={20} /> : <Menu size={20} />}
@@ -135,31 +132,31 @@ const Navbar = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="absolute top-full left-0 w-full bg-zinc-950 border-b border-zinc-900/80 shadow-2xl overflow-hidden"
+            className="absolute top-full left-0 w-full bg-bg border-b border-border shadow-2xl overflow-hidden z-50 xl:hidden"
           >
-            <div className="flex flex-col px-8 py-8 gap-5">
+            <div className="flex flex-col px-8 py-8 gap-5 text-left">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleLinkClick(e, link.href)}
-                  className="text-lg font-bold font-heading text-zinc-300 hover:text-white py-1 transition-colors"
+                  className="text-base font-black font-heading text-text-muted hover:text-text py-1 transition-colors uppercase tracking-wider"
                 >
                   {link.name}
                 </a>
               ))}
 
-              <div className="h-[1px] bg-zinc-900 my-2" />
+              <div className="h-[1px] bg-border my-2" />
 
               {/* Mobile Socials in Drawer */}
               <div className="flex gap-4 items-center">
-                <a href="www.linkedin.com/in/elson-benanzal-7451b129a" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white">
+                <a href="www.linkedin.com/in/elson-benanzal-7451b129a" target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-text">
                   <Linkedin size={18} />
                 </a>
-                <a href="https://github.com/Elson18" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white">
+                <a href="https://github.com/Elson18" target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-text">
                   <Github size={18} />
                 </a>
-                <a href="https://leetcode.com/Elson18/" target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-zinc-400 hover:text-white">
+                <a href="https://leetcode.com/Elson18/" target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-text-muted hover:text-text">
                   LeetCode
                 </a>
               </div>
@@ -167,7 +164,7 @@ const Navbar = () => {
               <a
                 href="/assets/Elson_Benanzal_Resume.pdf"
                 download="Elson_Benanzal_Resume.pdf"
-                className="w-full text-center font-mono font-semibold text-zinc-950 bg-white py-3 rounded-xl hover:bg-zinc-100 transition-colors mt-2"
+                className="w-full text-center font-mono font-bold text-bg bg-text py-3 rounded-xl hover:opacity-90 transition-opacity mt-2"
               >
                 Download Resume
               </a>
