@@ -1,0 +1,90 @@
+{
+  "name": "Elson Benanzal",
+  "username": "Elson_",
+  "avatar": "E",
+  "totalSolved": 1032,
+  "activeDays": 273,
+  "maxStreak": 60,
+  "currentStreak": 2,
+  "totalContests": 106,
+  "submissions": 335,
+  "globalRank": 11642,
+  "profileViews": 4,
+  "contests": {
+    "LeetCode": 18,
+    "CodeChef": 88
+  },
+  "ratings": {
+    "LeetCode": {
+      "rating": 1551,
+      "maxRating": 1584,
+      "rank": 18127,
+      "date": "22 Mar 2026",
+      "contest": "Weekly Contest 494"
+    },
+    "CodeChef": {
+      "rating": 1451,
+      "maxRating": 1451,
+      "stars": 2
+    }
+  },
+  "difficulty": {
+    "easy": 280,
+    "medium": 93,
+    "hard": 3
+  },
+  "platforms": {
+    "LeetCode": {
+      "solved": 376,
+      "rating": 1551,
+      "maxRating": 1584,
+      "badges": 2
+    },
+    "CodeChef": {
+      "solved": 621,
+      "rating": 1451,
+      "maxRating": 1451,
+      "badges": 1
+    },
+    "HackerRank": {
+      "solved": 35,
+      "rating": null,
+      "maxRating": null,
+      "badges": 5
+    }
+  },
+  "badges": [
+    { "name": "Sql ★★", "stars": 2, "category": "Language" },
+    { "name": "Python ★★", "stars": 2, "category": "Language" },
+    { "name": "Problem Solving ★", "stars": 1, "category": "DSA" },
+    { "name": "50 Days Streak", "category": "Consistency" },
+    { "name": "500 Problems Solved", "category": "Milestone" },
+    { "name": "50 Contests", "category": "Contests" },
+    { "name": "100 Days Badge 2025", "category": "Milestone" },
+    { "name": "50 Days Badge 2025", "category": "Milestone" }
+  ],
+  "topics": [
+    { "name": "Arrays", "value": 185 },
+    { "name": "String", "value": 95 },
+    { "name": "Math", "value": 71 },
+    { "name": "HashMap & Set", "value": 67 },
+    { "name": "Sorting", "value": 46 },
+    { "name": "Two Pointers", "value": 43 },
+    { "name": "Database", "value": 29 },
+    { "name": "Binary Search", "value": 27 },
+    { "name": "Dynamic Programming", "value": 26 },
+    { "name": "Bit Manipulation", "value": 26 },
+    { "name": "Simulation", "value": 26 }
+  ],
+  "contestHistory": [
+    { "contest": "Contest 1", "rating": 1360, "date": "Sep 2025" },
+    { "contest": "Contest 10", "rating": 1358, "date": "Oct 2025" },
+    { "contest": "Contest 25", "rating": 1366, "date": "Nov 2025" },
+    { "contest": "Contest 40", "rating": 1380, "date": "Dec 2025" },
+    { "contest": "Contest 55", "rating": 1395, "date": "Jan 2026" },
+    { "contest": "Contest 70", "rating": 1410, "date": "Feb 2026" },
+    { "contest": "Contest 85", "rating": 1435, "date": "Feb 2026" },
+    { "contest": "Contest 98", "rating": 1445, "date": "Mar 2026" },
+    { "contest": "Weekly Contest 494", "rating": 1551, "date": "Mar 2026" }
+  ]
+}
