@@ -152,7 +152,7 @@ const Contact = () => {
               {/* Social Channels */}
               <div className="flex flex-wrap gap-4 items-center mt-2">
                 <a
-                  href="www.linkedin.com/in/elson-benanzal-7451b129a"
+                  href="https://www.linkedin.com/in/elson-benanzal-7451b129a"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-1.5 text-xs font-mono font-bold text-[#64748B] hover:text-[#2563EB] uppercase tracking-wider transition-colors duration-250"

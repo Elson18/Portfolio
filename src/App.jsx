@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import Navbar from './components/Navbar';
 import CursorSpotlight from './components/CursorSpotlight';
 import Background from './components/Background';
@@ -17,6 +18,78 @@ import Footer from './components/Footer';
 function App() {
   return (
     <div className="min-h-screen bg-bg text-text font-sans selection:bg-brand-primary/20 selection:text-brand-accent transition-colors duration-300 relative">
+      <Helmet>
+        <html lang="en" />
+        <title>Elson Benanzal A. | AI Engineer & Agentic AI Developer</title>
+        <meta name="description" content="Elson Benanzal A. is an AI/ML Engineer specializing in agentic systems, LangGraph, LLM pipelines, RAG, and computer vision. Explore portfolio and case studies." />
+        <link rel="canonical" href="https://elson.in/" />
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="Elson Benanzal A." />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://elson.in/" />
+        <meta property="og:title" content="Elson Benanzal A. | AI Engineer & Agentic AI Developer" />
+        <meta property="og:description" content="Elson Benanzal A. is an AI/ML Engineer specializing in agentic systems, LangGraph, LLM pipelines, RAG, and computer vision. Explore portfolio and case studies." />
+        <meta property="og:image" content="https://elson.in/assets/og-image.png" />
+        <meta property="og:site_name" content="Elson Benanzal A. Portfolio" />
+
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://elson.in/" />
+        <meta property="twitter:title" content="Elson Benanzal A. | AI Engineer & Agentic AI Developer" />
+        <meta property="twitter:description" content="Elson Benanzal A. is an AI/ML Engineer specializing in agentic systems, LangGraph, LLM pipelines, RAG, and computer vision. Explore portfolio and case studies." />
+        <meta property="twitter:image" content="https://elson.in/assets/og-image.png" />
+
+        {/* Structured Data (JSON-LD) */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "Person",
+                "name": "Elson Benanzal A.",
+                "alternateName": ["Elson", "Elson Benanzal"],
+                "url": "https://elson.in",
+                "image": "https://elson.in/assets/og-image.png",
+                "jobTitle": "AI Engineer Intern",
+                "worksFor": {
+                  "@type": "Organization",
+                  "name": "Cloud Destinations"
+                },
+                "alumniOf": {
+                  "@type": "CollegeOrUniversity",
+                  "name": "KIT-Kalaignarkarunanidhi Institute of Technology"
+                },
+                "sameAs": [
+                  "https://www.linkedin.com/in/elson-benanzal-7451b129a",
+                  "https://github.com/Elson18",
+                  "https://leetcode.com/Elson18/",
+                  "https://codechef.com/users/elson18",
+                  "https://x.com/elson_aa"
+                ],
+                "knowsAbout": [
+                  "Artificial Intelligence",
+                  "Agentic AI",
+                  "LangGraph",
+                  "Large Language Models",
+                  "Retrieval-Augmented Generation",
+                  "Computer Vision",
+                  "Machine Learning",
+                  "Deep Learning",
+                  "FastAPI",
+                  "Python"
+                ]
+              },
+              {
+                "@type": "WebSite",
+                "name": "Elson Benanzal A. Portfolio",
+                "url": "https://elson.in"
+              }
+            ]
+          })}
+        </script>
+      </Helmet>
       {/* Permanent background canvas supporting particles/blurs under dark sections */}
       <Background />
 

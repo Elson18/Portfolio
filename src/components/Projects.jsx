@@ -174,7 +174,8 @@ const Projects = () => {
                     
                     <img 
                       src={project.image} 
-                      alt={project.title} 
+                      alt={`${project.title} — AI/ML Project Case Study by Elson Benanzal A.`} 
+                      loading="lazy"
                       onError={(e) => {
                         e.target.style.display = 'none';
                         e.target.parentNode.classList.add('bg-card', 'flex', 'items-center', 'justify-center');

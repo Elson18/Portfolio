@@ -75,7 +75,7 @@ const Navbar = () => {
         <div className="hidden lg:flex items-center gap-5">
           <div className="flex items-center gap-4 border-r border-border pr-5">
             <a
-              href="www.linkedin.com/in/elson-benanzal-7451b129a"
+              href="https://www.linkedin.com/in/elson-benanzal-7451b129a"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[10px] font-mono font-semibold uppercase tracking-wider text-text-muted hover:text-text transition-colors duration-200 flex items-center gap-1 group"
@@ -118,6 +118,7 @@ const Navbar = () => {
             onClick={() => setIsOpen(!isOpen)}
             className="text-text-muted hover:text-text focus:outline-none transition-colors cursor-pointer"
             aria-label="Toggle menu"
+            aria-expanded={isOpen}
           >
             {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -150,7 +151,7 @@ const Navbar = () => {
 
               {/* Mobile Socials in Drawer */}
               <div className="flex gap-4 items-center">
-                <a href="www.linkedin.com/in/elson-benanzal-7451b129a" target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-text">
+                <a href="https://www.linkedin.com/in/elson-benanzal-7451b129a" target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-text">
                   <Linkedin size={18} />
                 </a>
                 <a href="https://github.com/Elson18" target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-text">
